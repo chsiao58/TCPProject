@@ -1,13 +1,13 @@
 package com.gottit.TCPProject.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+
     @Column(name = "user_name")
     private String username;
     private String password;

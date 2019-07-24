@@ -42,6 +42,15 @@ public class DMService {
     // and the current user called will be the user in the DirectUserPK
     public Iterable<Message> show(Long from_id, Long to_id) {
 
+        List<Long> resultMessageId = getFromToMessageId(from_id, to_id);
+        resultMessageId.addAll(getFromToMessageId(to_id,from_id));
+        Collections.sort(resultMessageId);
+        // get all those message from messageRepo using the filtered message_ids
+        return messageRepo.findAllById(resultMessageId);
+    }
+
+    public List<Long> getFromToMessageId(Long from_id, Long to_id) {
+
         // find all message_id user A created
         List<Long> fromMessageId =
                 messageRepo.findAllByUserId(from_id)
@@ -52,15 +61,11 @@ public class DMService {
         // find all message_id user B received,
         // in these message_ids, find all message_ids that create by user A
         // those message_ids will be the message user A sent to user B
-        List<Long> resultMessageId =
-                DMRepo.findAllByDirectMessagePK_ToId(to_id)
+        return DMRepo.findAllByDirectMessagePK_ToId(to_id)
                         .stream()
                         .map(DirectMessage::getDirectMessagePK)
                         .map(DirectMessagePK::getMessage_id)
                         .filter(fromMessageId::contains)
                         .collect(Collectors.toList());
-
-        // get all those message from messageRepo using the filtered message_ids
-        return messageRepo.findAllById(resultMessageId);
     }
 }

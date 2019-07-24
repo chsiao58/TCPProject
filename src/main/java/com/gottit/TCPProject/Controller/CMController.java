@@ -26,5 +26,10 @@ public class CMController {
     public ResponseEntity<Iterable<Message>> show(@PathVariable Long channel_id){
         return new ResponseEntity<>(cmService.show(channel_id), HttpStatus.OK);
     }
+//
+//    @GetMapping("/channel/{user_id}")
+//    public ResponseEntity<Iterable<Message>> showUser(@PathVariable Long user_id){
+//        return new ResponseEntity<>(cmService.show(user_id), HttpStatus.OK);
+//    }
 
 }

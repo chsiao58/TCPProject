@@ -14,6 +14,7 @@ public class DMController {
     @Autowired
     private DMService dmService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/DM/{to_id}")
     public ResponseEntity<Message> create(@RequestBody Message message, @PathVariable Long to_id){
         return new ResponseEntity<>(dmService.create(message, to_id), HttpStatus.CREATED);

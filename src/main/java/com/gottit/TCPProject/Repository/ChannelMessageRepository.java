@@ -13,5 +13,4 @@ public interface ChannelMessageRepository extends CrudRepository<ChannelMessage,
     //https://stackoverflow.com/questions/43865079/spring-jpa-find-by-embeddedid-partially/43882807
     public List<ChannelMessage> findAllByChannelMessagePK_ChannelID(Long channel_id); //findAllByChannelMessagePK_Channel_id
 
-
 }
