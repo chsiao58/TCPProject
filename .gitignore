@@ -121,3 +121,4 @@ modules.xml
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/intellij+all
+src/main/java/com/gottit/TCPProject/.DS_Store
