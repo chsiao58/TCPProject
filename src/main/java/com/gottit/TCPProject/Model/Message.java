@@ -8,27 +8,29 @@ public class Message{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long message_id;
-    @Column(name = "user_id")
-    private Long userId;
+
+    @ManyToOne
+    private User user;
+    
     private String message;
     private String time; //datetime data structure
 
-    public Message(Long message_id, Long userId, String message) {
+    public Message(Long message_id, User user, String message) {
         this.message_id = message_id;
-        this.userId = userId;
+        this.user = user;
         this.message = message;
     }
 
     //shouldnt use this as db inputs datetime automaticaly on insert.
-    public Message(Long message_id, Long userId, String message, String time) {
+    public Message(Long message_id, User user, String message, String time) {
         this.message_id = message_id;
-        this.userId = userId; //who made message
+        this.user = user;
         this.message = message;
         this.time = time; //set this to null ?
     }
 
-    public Message(Long user_id, String message) {
-        this.userId = user_id;
+    public Message(User user, String message) {
+        this.user = user;
         this.message = message;
     }
 
@@ -41,14 +43,6 @@ public class Message{
 
     public void setMessage_id(Long message_id) {
         this.message_id = message_id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getMessage() {
@@ -71,7 +65,7 @@ public class Message{
     public String toString() {
         return "Message{" +
                 "message_id=" + message_id +
-                ", userId=" + userId +
+                ", user=" + user.getUsername() +
                 ", message='" + message + '\'' +
                 ", time='" + time + '\'' +
                 '}';
