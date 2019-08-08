@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface UserChannelRepository extends CrudRepository<UserChannel, UserChannelPK> {
-   // public List<UserChannel> findAllByUserChannelPK_UserID(Long user_id);
     public List<UserChannel> findAllByUserChannelPK_UserId(Long user_id);
 }
 

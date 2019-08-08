@@ -3,13 +3,12 @@ package com.gottit.TCPProject.Model;
 import org.hibernate.annotations.Type;
 import org.springframework.context.annotation.Primary;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Channel {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long channel_id;
     @Column
     private String channel_name;

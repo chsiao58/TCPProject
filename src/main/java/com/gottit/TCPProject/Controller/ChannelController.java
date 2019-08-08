@@ -26,15 +26,19 @@ public class ChannelController {
     @Autowired
     UserChannelRepository userChannelRepository;
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<Channel> create(@RequestBody Channel channel){
         return new ResponseEntity(channelRepository.save( channel), HttpStatus.OK);
     }
+
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<Channel> show(){
         return new ResponseEntity(channelRepository.findAll(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/channelsforuser/{userid}")
     public ResponseEntity<Channel> showbyUser(@PathVariable int userid){
         return new ResponseEntity(channelService.getChannelsByUserID(channelRepository.findAll(),userid), HttpStatus.OK);
@@ -53,10 +57,16 @@ public class ChannelController {
         return  new ResponseEntity(userChannelRepository.findAllByUserChannelPK_UserId(user_id),HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:8100/chatpage")
+    @CrossOrigin
     @GetMapping("/channel/getChannel/{channel_id}")
     public ResponseEntity<Channel> getByChannel(@PathVariable Long channel_id){
         return  new ResponseEntity(channelRepository.findById(channel_id),HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping("/getById/{user_id}")
+    public ResponseEntity<Channel> getById(@PathVariable Long user_id){
+        return new ResponseEntity(channelRepository.findChannelByUserId(user_id), HttpStatus.OK);
     }
 
 }

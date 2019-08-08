@@ -21,19 +21,19 @@ public class UserController {
         return new ResponseEntity(userRepository.save(user), HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @GetMapping("/{user_name}")
     public ResponseEntity<User> show(@PathVariable String user_name){
         return new ResponseEntity(userRepository.findAllByUsername(user_name),HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @GetMapping("/id/{id}")
     public ResponseEntity<User> showUser(@PathVariable Long id){
         return new ResponseEntity(userRepository.findAllByUserId(id),HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<User[]> showAll(){
         return new ResponseEntity(userRepository.findAll(),HttpStatus.OK);
